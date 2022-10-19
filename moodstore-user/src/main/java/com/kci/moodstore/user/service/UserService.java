@@ -2,6 +2,7 @@ package com.kci.moodstore.user.service;
 
 
 import com.kci.moodstore.user.dto.UserDTO;
+import com.kci.moodstore.user.model.User;
 
 /**
  * @program: moodstore-appointment
@@ -12,7 +13,5 @@ import com.kci.moodstore.user.dto.UserDTO;
 public interface UserService {
 
     UserDTO getUserById(Long id);
-
-
 
 }
