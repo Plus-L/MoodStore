@@ -50,6 +50,4 @@ public interface UserMapper {
      */
     List<User> list();
 
-
-
 }
