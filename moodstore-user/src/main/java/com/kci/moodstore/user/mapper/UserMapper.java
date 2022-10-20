@@ -50,4 +50,11 @@ public interface UserMapper {
      */
     List<User> list();
 
+    /**
+     * 通过id列表获取用户列表
+     * @param list
+     * @return
+     */
+    List<User> getUsersByIds(List<Long> list);
+
 }

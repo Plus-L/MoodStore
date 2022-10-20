@@ -52,4 +52,14 @@
         from mood_user order by id desc
     </select>
 
+    <select id="getUsersByIds" resultType="com.kci.moodstore.user.model.User">
+        select <include refid="fullField"></include>
+        from mood_user
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+        order by id desc
+    </select>
+
 </mapper>

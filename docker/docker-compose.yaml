@@ -1,0 +1,133 @@
+version: "3.5"
+
+services:
+  moodstore-mysql:
+    image: mysql:8.0
+    container_name: moodstore-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/initdb:/docker-entrypoint-initdb.d
+      - ./mysql/mysql-files:/var/lib/mysql-files
+
+  moodstore-redis:
+    image: redis:6.2
+    container_name: moodstore-redis
+    restart: always
+    ports:
+      - 6379:6379
+
+  moodstore-nacos:
+    image: nacos/nacos-server:2.0.2
+    container_name: moodstore-nacos
+    restart: always
+    depends_on:
+      - moodstore-mysql
+    ports:
+      - 8848:8848
+      - 9848:9848
+      - 9849:9849
+    environment:
+      - JVM_XMS=256m
+      - JVM_XMX=256m
+      - MODE=standalone
+      - PREFER_HOST_MODE=hostname
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=114.132.247.187
+      - MYSQL_SERVICE_DB_NAME=moodstore_nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root
+    volumes:
+      - ./nacos/logs:/home/nacos/logs
+
+  moodstore-elasticsearch:
+    image: elasticsearch:7.13.2
+    container_name: moodstore-elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
+
+  moodstore-kibana:
+    image: kibana:7.13.2
+    container_name: moodstore-kibana
+    restart: always
+    ports:
+      - 5601:5601
+    links:
+      - moodstore-elasticsearch:elasticsearch
+    depends_on:
+      - moodstore-elasticsearch
+
+  moodstore-rocketmq-namesrv:
+    image: foxiswho/rocketmq:4.8.0
+    container_name: moodstore-rocketmq-namesrv
+    restart: always
+    ports:
+      - 9876:9876
+    volumes:
+      - ./rocketmq/namesrv/logs:/home/rocketmq/logs
+      - ./rocketmq/namesrv/store:/home/rocketmq/store
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
+    command: ["sh","mqnamesrv"]
+    networks:
+      rocketmq:
+        aliases:
+          - moodstore-rocketmq-namesrv
+
+
+  moodstore-rocketmq-broker:
+    image: foxiswho/rocketmq:4.8.0
+    container_name: moodstore-rocketmq-broker
+    restart: always
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./rocketmq/broker/logs:/home/rocketmq/logs
+      - ./rocketmq/broker/store:/home/rocketmq/store
+      - ./rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
+    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","moodstore-rocketmq-namesrv:9876","autoCreateTopicEnable=true"]
+    depends_on:
+      - moodstore-rocketmq-namesrv
+    networks:
+      rocketmq:
+        aliases:
+          - moodstore-rocketmq-broker
+
+
+  moodstore-rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: moodstore-rocketmq-console
+    restart: always
+    ports:
+      - 8180:8080
+    environment:
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=moodstore-rocketmq-namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    depends_on:
+      - moodstore-rocketmq-namesrv
+    networks:
+      rocketmq:
+        aliases:
+          - moodstore-rocketmq-console
+
+
+networks:
+  rocketmq:
+    name: rocketmq
+    driver: bridge

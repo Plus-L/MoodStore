@@ -2,21 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>moodstore-framework</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>moodstore-framework-cache</artifactId>
     <version>1.0.0</version>
-    <description>解忧事务所 -- framework模板层</description>
+    <name>moodstore-framework-cache</name>
+    <packaging>jar</packaging>
+    <description>解忧事务所 -- 缓存模块</description>
 
     <parent>
+        <artifactId>moodstore-framework</artifactId>
         <groupId>com.kci.moodstore</groupId>
-        <artifactId>moodstore-parent</artifactId>
         <version>1.0.0</version>
     </parent>
-
-    <modules>
-        <module>moodstore-framework-common</module>
-        <module>moodstore-framework-database</module>
-        <module>moodstore-framework-cache</module>
-    </modules>
 
 </project>
