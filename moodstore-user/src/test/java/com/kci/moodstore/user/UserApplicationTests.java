@@ -1,10 +1,10 @@
-package com.kci.moodstore.pstest;
+package com.kci.moodstore.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PstestApplicationTests {
+class UserApplicationTests {
 
     @Test
     void contextLoads() {

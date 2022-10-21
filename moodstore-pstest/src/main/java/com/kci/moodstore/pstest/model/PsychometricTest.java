@@ -1,23 +1,20 @@
 package com.kci.moodstore.pstest.model;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("mood_psychometric_test")
-public class PsychometricTest implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class PsychometricTest {
     // 主键
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
     // 测试名称
     private String title;
@@ -29,7 +26,7 @@ public class PsychometricTest implements Serializable {
     private Integer testerNumber;
     // 喜欢人数
     private Integer liked;
-    // 测试类型(有8种)
+    // 测试类型
     private Integer type;
     // 测试封面图片
     private String imageUrl;
