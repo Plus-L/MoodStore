@@ -19,7 +19,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         log.info("公共字段自动填充[insert]...");
         log.info(metaObject.toString());
         metaObject.setValue("createTime", LocalDateTime.now());
-
+        metaObject.setValue("updateTime", LocalDateTime.now());
     }
 
     /**
@@ -30,10 +30,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         log.info("公共字段自动填充[update]...");
         log.info(metaObject.toString());
-
-        long id = Thread.currentThread().getId();
-        log.info("线程id为：{}", id);
-
         metaObject.setValue("updateTime", LocalDateTime.now());
     }
 }
