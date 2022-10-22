@@ -1,4 +1,4 @@
-package com.kci.moodstore.cache.config;
+package com.kci.moodstore.framework.cache.config;
 
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.cache.annotation.EnableCaching;

@@ -1,20 +1,14 @@
-package com.kci.moodstore.user.dto;
+package com.kci.moodstore.user.vo;
 
-import com.kci.moodstore.framework.common.dto.BaseDTO;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.kci.moodstore.framework.common.vo.BaseVO;
 
 /**
- * @program: moodstore-appointment
- * @description: User 传输实体
+ * @program: moodstore
+ * @description: 用户详细信息展示类
  * @author: PlusL
- * @create: 2022-10-15 21:53
+ * @create: 2022-10-20 21:39
  **/
-@Getter
-@Setter
-@ToString
-public class UserDTO extends BaseDTO {
+public class UserDetailVO extends BaseVO {
 
     /**
      * 用户ID

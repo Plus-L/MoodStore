@@ -2,7 +2,7 @@ package com.kci.moodstore.user.mapstruct;
 
 import com.kci.moodstore.user.dto.UserDTO;
 import com.kci.moodstore.user.model.User;
-import com.kci.moodstore.user.vo.UserVO;
+import com.kci.moodstore.user.vo.UserSimpleVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -21,8 +21,8 @@ public interface UserMapStruct {
 
     UserDTO toDTO(User user);
 
-    UserVO toVO(User user);
+    UserSimpleVO toSimpleVO(User user);
 
-    List<UserVO> toDTOlist(List<User> list);
+    List<UserSimpleVO> toSimpleVOList(List<User> list);
 
 }
