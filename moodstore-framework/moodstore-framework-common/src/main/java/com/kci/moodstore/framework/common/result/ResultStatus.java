@@ -53,31 +53,6 @@ public enum ResultStatus {
     NICKNAME_OR_PASSWORD_ERROR("30012", "用户名或密码有误"),
     TOKEN_ERROR("30013", "token不存在或已失效，请重新登录"),
 
-
-    /**
-     * 订单模块
-     */
-    ORDER_NOT_EXIST("60001", "订单不存在"),
-    GET_ORDER_ERROR("60002", "获取订单失败"),
-    CREAT_ORDER_FAIL("60003", "创建订单失败"),
-
-    /**
-     * 秒杀模块
-     */
-    SECKILL_OVER("40001", "很抱歉，商品已经秒杀完了"),
-    REPEATE_SECKILL("40002", "不能重复秒杀"),
-    SECKILL_FAIL("40003", "秒杀失败"),
-    GET_RESULT_ERROR("40004", "获取结果失败，请稍后再试"),
-    SECKILL_SUCCESS("40000", "恭喜，秒杀成功~"),
-
-    /**
-     * 商品模块
-     */
-    GET_GOODS_LIST_ERROR("50001", "获取商品列表失败，请稍后再试"),
-    GET_GOODS_ERROR("50002", "获取商品失败，请稍后再试"),
-    PURCHASE_FAIL("50003", "购买商品失败"),
-    INIT_MOCK_ERROR("50004", "初始化库存失败"),
-
     /**
      * 消息队列
      */

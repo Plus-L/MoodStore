@@ -16,6 +16,8 @@
     <modules>
         <module>moodstore-framework-common</module>
         <module>moodstore-framework-database</module>
+        <module>moodstore-framework-cache</module>
+        <module>moodstore-framework-security</module>
     </modules>
 
 </project>

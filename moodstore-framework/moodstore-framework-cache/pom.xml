@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>moodstore-framework-cache</artifactId>
+    <version>1.0.0</version>
+    <name>moodstore-framework-cache</name>
+    <packaging>jar</packaging>
+    <description>解忧事务所 -- 缓存模块</description>
+
+    <parent>
+        <artifactId>moodstore-framework</artifactId>
+        <groupId>com.kci.moodstore</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+</project>

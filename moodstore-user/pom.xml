@@ -16,14 +16,21 @@
     <dependencies>
         <dependency>
             <groupId>com.kci.moodstore</groupId>
-            <artifactId>moodstore-framework-common</artifactId>
+            <artifactId>moodstore-framework-cache</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.kci.moodstore</groupId>
             <artifactId>moodstore-framework-database</artifactId>
             <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.kci.moodstore</groupId>
+            <artifactId>moodstore-framework-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

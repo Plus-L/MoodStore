@@ -48,7 +48,7 @@ public class User extends BaseModel implements Serializable {
     private Integer type;
 
     /**
-     * 用户状态
+     * 用户状态：1 正常 | 0 无效
      */
     private Integer status;
 
