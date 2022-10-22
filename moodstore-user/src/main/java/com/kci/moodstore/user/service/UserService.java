@@ -4,8 +4,7 @@ package com.kci.moodstore.user.service;
 import com.kci.moodstore.framework.database.dto.PageDTO;
 import com.kci.moodstore.framework.database.vo.PageVO;
 import com.kci.moodstore.user.dto.UserDTO;
-import com.kci.moodstore.user.model.User;
-import com.kci.moodstore.user.vo.UserVO;
+import com.kci.moodstore.user.vo.UserSimpleVO;
 
 import java.util.List;
 
@@ -19,8 +18,8 @@ public interface UserService {
 
     UserDTO getUserById(Long id);
 
-    PageVO<UserVO> getUserInPage(PageDTO pageDTO);
+    PageVO<UserSimpleVO> getUserInPage(PageDTO pageDTO);
 
-    List<UserVO> getUserByUserIds(List<Long> userIds);
+    List<UserSimpleVO> getUserByUserIds(List<Long> userIds);
 
 }

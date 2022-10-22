@@ -1,4 +1,4 @@
-package com.kci.moodstore.cache.util;
+package com.kci.moodstore.framework.cache.util;
 
 /**
  * @program: moodstore
