@@ -10,10 +10,10 @@ public class OSSClientUtil implements InitializingBean {
     private final String endpoint = "oss-cn-shenzhen.aliyuncs.com";
 
     //阿里云OSS的accessKeyId
-    private final String accessKeyId = "";    //  我把这keyid和密钥一上传到github，阿里云立马发短信给我，让我禁用。。。。有点牛逼
+    private final String accessKeyId = "LTAI5t9i7ZRBDUBwt4oZtP1m";    //  我把这keyid和密钥一上传到github，阿里云立马发短信给我，让我禁用。。。。有点牛逼
 
     //阿里云OSS的密钥
-    private final String accessKeySecret = "";
+    private final String accessKeySecret = "xxmeHvNnKtRIcV0QZD5zhaFZXiEDTr";
 
     //阿里云OSS上的存储块bucket名字
     private String bucketName = "moodstore";
