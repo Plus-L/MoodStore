@@ -4,11 +4,11 @@ import com.kci.moodstore.framework.common.vo.BaseVO;
 
 /**
  * @program: moodstore
- * @description: 展示层user对象
+ * @description: 展示层user简易对象
  * @author: PlusL
  * @create: 2022-10-19 18:10
  **/
-public class UserVO extends BaseVO {
+public class UserSimpleVO extends BaseVO {
 
     /**
      * 用户ID
