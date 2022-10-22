@@ -52,7 +52,7 @@
         <rocketmq-springboot.version>2.2.0</rocketmq-springboot.version>
         <weixin.version>4.0.0</weixin.version>
         <spring-javaformat.version>0.0.22</spring-javaformat.version>
-        <druid.version>1.2.11</druid.version>
+        <druid.version>1.2.9</druid.version>
         <fastjson.version>2.0.15</fastjson.version>
         <skywalking.version>8.7.0</skywalking.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
@@ -80,6 +80,16 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
                 <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
             </dependency>
 
             <!--    Lombok    -->
@@ -141,12 +151,12 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>${commons-codec.version}</version>
+<!--                <version>${commons-codec.version}</version>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
+<!--                <version>${commons-lang3.version}</version>-->
             </dependency>
 
             <!--  Json工具类 :FastJson2   -->

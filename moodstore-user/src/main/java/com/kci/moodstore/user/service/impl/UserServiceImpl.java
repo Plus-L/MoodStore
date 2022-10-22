@@ -2,7 +2,9 @@ package com.kci.moodstore.user.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.alibaba.fastjson2.JSON;
 import com.kci.moodstore.framework.cache.util.RedisKeyUtil;
+import com.kci.moodstore.framework.cache.util.RedisUtil;
 import com.kci.moodstore.framework.database.dto.PageDTO;
 import com.kci.moodstore.framework.database.util.PageUtil;
 import com.kci.moodstore.framework.database.vo.PageVO;
@@ -35,6 +37,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Override
     public UserDTO getUserById(Long id) {
         User user = getCache(id);
@@ -64,7 +69,8 @@ public class UserServiceImpl implements UserService {
      */
     private User getCache(Long userId) {
         String redisKey = RedisKeyUtil.getUserKey(userId);
-        return (User) redisTemplate.opsForValue().get(redisKey);
+        return JSON.parseObject(redisUtil.get(redisKey), User.class);
+//        return (User) redisTemplate.opsForValue().get(redisKey);
     }
 
     /**
@@ -75,7 +81,8 @@ public class UserServiceImpl implements UserService {
     private User initCache(Long userId) {
         User user = userMapper.getUserById(userId);
         String redisKey = RedisKeyUtil.getUserKey(userId);
-        redisTemplate.opsForValue().set(redisKey, user, 3600, TimeUnit.SECONDS);
+//        redisTemplate.opsForValue().set(redisKey, user, 3600, TimeUnit.SECONDS);
+        redisUtil.set(redisKey, user, 3600L);
         return user;
     }
 
