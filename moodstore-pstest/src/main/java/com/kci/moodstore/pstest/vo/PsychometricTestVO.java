@@ -1,11 +1,8 @@
 package com.kci.moodstore.pstest.vo;
 
-import com.kci.moodstore.pstest.bo.TestQuestions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,7 +26,7 @@ public class PsychometricTestVO {
     private String imageUrl;
 
     /*
-        测试的题目
+     * 是否点赞过
      */
-    private List<TestQuestions> questionsList;
+    private Boolean isLike;
 }

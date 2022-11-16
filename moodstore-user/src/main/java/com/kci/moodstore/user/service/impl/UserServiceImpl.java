@@ -35,9 +35,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private RedisTemplate redisTemplate;
-
-    @Autowired
     private RedisUtil redisUtil;
 
     @Override
@@ -86,13 +83,5 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    /**
-     * 用户信息变更时清除对应缓存数据
-     * @param userId
-     */
-    private void clearCache(Long userId) {
-        String redisKey = RedisKeyUtil.getUserKey(userId);
-        redisTemplate.delete(redisKey);
-    }
 
 }

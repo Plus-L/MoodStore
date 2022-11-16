@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kci.moodstore.pstest.mapper.PsyTestResultMapper">
+
+    <resultMap id="PsyTestResultMap" type="com.kci.moodstore.pstest.vo.PsyTestResultVO">
+        <id column="id" property="testId"/>
+        <result column="title" property="title"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="result" property="result"/>
+    </resultMap>
+
+    <select id="getPsyTestResultVO" parameterType="long" resultMap="PsyTestResultMap">
+        select T.id,
+               T.title,
+               T.image_url,
+               R.result
+        from mood_psy_test_result as R,
+             mood_psychometric_test as T
+        where R.test_id = T.id and R.user_id = #{userId} and R.test_id = #{testId};
+    </select>
+
+</mapper>
