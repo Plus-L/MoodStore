@@ -40,11 +40,22 @@
     <update id="updateBatchByTestId" parameterType="map">
         <foreach collection="likeCountMap" index="key" item="value" separator=";">
             update
-            mood_psychometric_test
+                mood_psychometric_test
             set
-            liked = #{value}
+                liked = #{value}
             where
-            id = #{key}
+                id = #{key}
+        </foreach>
+    </update>
+
+    <update id="updateTesterNum" parameterType="map">
+        <foreach collection="testerCountMap" index="key" item="value" separator=";">
+            update
+                mood_psychometric_test
+            set
+                tester_number = #{value}
+            where
+                id = #{key}
         </foreach>
     </update>
 

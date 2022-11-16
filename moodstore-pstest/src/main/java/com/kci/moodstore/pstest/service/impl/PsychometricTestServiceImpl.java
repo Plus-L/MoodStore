@@ -43,7 +43,7 @@ public class PsychometricTestServiceImpl extends ServiceImpl<PsychometricTestMap
     @Override
     public CommonResult<Boolean> liked(Long userId, Long psyTestId) {
         // 从redis中获取psyDetail的基本信息
-        String key = CommonConstant.CACHE_PSY_DETAILS_KEY + psyTestId;
+        String key = CACHE_PSY_DETAILS_KEY + psyTestId;
         String psyDetailJson = stringRedisTemplate.opsForValue().get(key);
         if (StrUtil.isEmpty(psyDetailJson)) {
             // 操作逻辑不对，应该先发getPsyTestDetails请求才有可能发liked请求；不排除有人恶意访问

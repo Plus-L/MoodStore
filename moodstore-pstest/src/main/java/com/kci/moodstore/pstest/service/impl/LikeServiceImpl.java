@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.kci.moodstore.framework.common.constant.PsyTestConstant.PSY_TEST_LIKED_USER;
+import static com.kci.moodstore.framework.common.constant.PsyTestConstant.*;
 
 @Service
 @Slf4j
@@ -67,9 +67,18 @@ public class LikeServiceImpl implements LikeService {
     @Transactional
     public void transLikedCount2DB() {
         // 1. 首先先从redis中获取PSY_TEST_LIKED_COUNT的 Hash 集合
-        Map<Object, Object> likeCountMap = stringRedisTemplate.opsForHash().entries("PSY_TEST_LIKED_COUNT");
+        Map<Object, Object> likeCountMap = stringRedisTemplate.opsForHash().entries(PSY_TEST_LIKED_COUNT);
         // 2. 再批量更新数据库
         likedMapper.updateBatchByTestId(likeCountMap);
+    }
+
+    @Override
+    @Transactional
+    public void transTesterCount2DB() {
+        // 1. 首先先从redis中获取PSY_TEST_TESTER_COUNT的 Hash 集合
+        Map<Object, Object> testerCountMap = stringRedisTemplate.opsForHash().entries(PSY_TEST_TESTER_COUNT);
+        // 2. 再批量更新数据库
+        likedMapper.updateTesterNum(testerCountMap);
     }
 
     public List<Long> string2LongList(Set<String> members) {

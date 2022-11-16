@@ -12,4 +12,9 @@ public interface LikeService {
      */
     void transLikedCount2DB();
 
+    /**
+     * 将redis里的测试人数存入数据库中
+     */
+    void transTesterCount2DB();
+
 }

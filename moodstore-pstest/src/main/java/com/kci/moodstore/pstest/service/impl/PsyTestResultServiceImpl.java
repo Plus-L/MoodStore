@@ -6,7 +6,6 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kci.moodstore.framework.common.constant.CommonConstant;
 import com.kci.moodstore.framework.common.result.CommonResult;
 import com.kci.moodstore.framework.common.result.ResultStatus;
 import com.kci.moodstore.pstest.mapper.PsyTestResultMapper;
@@ -20,12 +19,13 @@ import com.kci.moodstore.pstest.vo.PsyTestResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.kci.moodstore.framework.common.constant.CommonConstant.CACHE_NULL_TTL;
+import static com.kci.moodstore.framework.common.constant.PsyTestConstant.*;
 
 @Service
 @Slf4j
@@ -43,9 +43,8 @@ public class PsyTestResultServiceImpl extends ServiceImpl<PsyTestResultMapper, P
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    private final String OSS_RESULT_PATH = "mood-pstest/result/";
-
     @Override
+    @Transactional
     public CommonResult<PsyTestResultVO> getResultByItem(Long userId, Long testId, String Item) {
         // 1.生成url
         PsychometricTest psychometricTest = psyTestService.getById(testId);
@@ -71,17 +70,16 @@ public class PsyTestResultServiceImpl extends ServiceImpl<PsyTestResultMapper, P
         // 4.将result实体插入数据库
         // 4.1.先判断之前是否测试过
         LambdaQueryWrapper<PsyTestResult> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(testId != null, PsyTestResult::getTestId, testId);
+        queryWrapper.eq(userId != null, PsyTestResult::getUserId, userId).eq(testId != null, PsyTestResult::getTestId, testId);
         PsyTestResult psyTestResult = getOne(queryWrapper);
-        if (psyTestResult != null) {
+        if (ObjectUtil.isNotNull(psyTestResult)) {
             // 4.2.测试过，则修改result，再update一下数据
             psyTestResult.setResult(result);
             this.updateById(psyTestResult);
         } else {
-            // 4.3.未测试过，插入数据库；测试人数+1
-            // TODO 后期优化！！！应先redis+1，经过一段时间再从redis迁移到mysql quart计时器
+            // 4.3.未测试过，先redis+1，再定时任务更新数据库
             this.save(new PsyTestResult(userId, testId, result));
-            psyTestService.update().setSql("liked = liked + 1").eq("id", testId);
+            stringRedisTemplate.opsForHash().increment(PSY_TEST_TESTER_COUNT, String.valueOf(testId), 1);
         }
 
         // 5.将resultVO类插入redis
@@ -93,8 +91,9 @@ public class PsyTestResultServiceImpl extends ServiceImpl<PsyTestResultMapper, P
     }
 
     @Override
+    @Transactional
     public CommonResult<PsyTestResultVO> getResult(Long userId, Long testId) {
-        String key = CommonConstant.CACHE_PSY_DETAILS_KEY + ":" + userId + ":" + testId;
+        String key = CACHE_PSY_DETAILS_KEY + ":" + userId + ":" + testId;
         // 1.从redis查询resultVO缓存
         String json = stringRedisTemplate.opsForValue().get(key);
 

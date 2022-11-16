@@ -18,4 +18,7 @@ public interface PULRelationMapper extends BaseMapper<PULRelation> {
     // Redis 批量插入点赞数到数据库
     Integer updateBatchByTestId(@Param("likeCountMap") Map<Object, Object> likeCountMap);
 
+    // Redis 批量插入测试数到数据库
+    Integer updateTesterNum(@Param("testerCountMap") Map<Object, Object> testerCountMap);
+
 }

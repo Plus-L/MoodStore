@@ -26,5 +26,6 @@ public class LikeTask extends QuartzJobBean {
         // 将redis中的数据同步到数据库中
         likeService.transLikedMember2DB();
         likeService.transLikedCount2DB();
+        likeService.transTesterCount2DB();
     }
 }
