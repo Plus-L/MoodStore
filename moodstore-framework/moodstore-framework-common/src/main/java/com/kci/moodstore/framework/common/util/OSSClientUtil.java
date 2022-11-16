@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 public class OSSClientUtil {
 
     // 定义公开静态变量
-    public static String END_POINT = "oss-cn-shenzhen.aliyuncs.com";
+    public static String END_POINT = "";
     public static String ACCESS_KEY_ID = "";
     public static String ACCESS_KEY_SECRET = "";
-    public static String BUCKET_NAME = "moodstore";
+    public static String BUCKET_NAME = "";
 
 }
