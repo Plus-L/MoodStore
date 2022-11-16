@@ -14,9 +14,13 @@ public class PsyTestConstant {
 
     public static final String OSS_QUESTION_FILE = "mood-pstest/question/";
 
+    public static final String OSS_RESULT_PATH = "mood-pstest/result/";
+
     public static final String PSY_TEST_LIKED_MEMBER = "PSY_TEST_LIKED_MEMBER:";
 
     public static final String PSY_TEST_LIKED_USER = "PSY_TEST_LIKED_USER:";
 
     public static final String PSY_TEST_LIKED_COUNT = "PSY_TEST_LIKED_COUNT";
+
+    public static final String PSY_TEST_TESTER_COUNT = "PSY_TEST_TESTER_COUNT";
 }
