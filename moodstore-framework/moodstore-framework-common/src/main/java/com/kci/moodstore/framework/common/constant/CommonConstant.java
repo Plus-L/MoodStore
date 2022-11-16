@@ -16,12 +16,5 @@ public class CommonConstant {
      */
     public static final String COOKIE_NAME_TOKEN = "TOKEN";
 
-    /**
-     * cache_psyDetails_key
-     */
-    public static final String CACHE_PSY_DETAILS_KEY = "PSY_TEST_DETAILS:";
-    public static final Long CACHE_PSY_TTL = 60L;
-    public static final Long CACHE_NULL_TTL = 5L;
-
 
 }
