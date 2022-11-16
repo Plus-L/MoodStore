@@ -7,6 +7,6 @@ public class PsyTestDTO {
 
     private Long testId;
 
-    private Integer score;
+    private String Item;
 
 }

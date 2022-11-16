@@ -41,10 +41,15 @@
             </exclusions>
         </dependency>
 
-        <!-- 导入moodstore-user类 -->
+        <!-- 导入moodstore-framework类 -->
         <dependency>
             <groupId>com.kci.moodstore</groupId>
-            <artifactId>moodstore-user</artifactId>
+            <artifactId>moodstore-framework-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kci.moodstore</groupId>
+            <artifactId>moodstore-framework-cache</artifactId>
             <version>1.0.0</version>
         </dependency>
 
@@ -73,17 +78,10 @@
             <version>4.17.6</version>
         </dependency>
 
-        <!--mapstruct核心-->
+        <!-- Quartz定时器 -->
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>1.5.0.Beta1</version>
-        </dependency>
-        <!--mapstruct编译-->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>1.5.0.Beta1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
     </dependencies>
 

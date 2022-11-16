@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @TableName("mood_psy_test_result")
 public class PsyTestResult implements Serializable {
@@ -26,4 +25,9 @@ public class PsyTestResult implements Serializable {
 
     private String result;
 
+    public PsyTestResult(Long userId, Long testId, String result) {
+        this.userId = userId;
+        this.testId = testId;
+        this.result = result;
+    }
 }

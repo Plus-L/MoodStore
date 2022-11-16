@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kci.moodstore.pstest.mapper.PULRelationMapper">
+
+    <resultMap id="PsyTestMap" type="PsychometricTest">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="conspectus" property="conspectus"/>
+        <result column="question_number" property="questionNumber"/>
+        <result column="tester_number" property="testerNumber"/>
+        <result column="liked" property="liked"/>
+        <result column="type" property="type"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getByLiked" parameterType="long" resultType="List" resultMap="PsyTestMap">
+        select id,
+               title,
+               conspectus,
+               question_number,
+               tester_number,
+               liked,
+               type,
+               image_url,
+               status,
+               create_time,
+               update_time
+        from mood_psychometric_test as A,
+             mood_user_test_liked as B
+        where A.id = B.test_id and B.user_id = #{userId}
+        order by A.create_time desc;
+    </select>
+
+    <update id="updateBatchByTestId" parameterType="map">
+        <foreach collection="likeCountMap" index="key" item="value" separator=";">
+            update
+            mood_psychometric_test
+            set
+            liked = #{value}
+            where
+            id = #{key}
+        </foreach>
+    </update>
+
+</mapper>

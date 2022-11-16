@@ -17,8 +17,11 @@ public class CommonConstant {
     public static final String COOKIE_NAME_TOKEN = "TOKEN";
 
     /**
-     * 阿里云 OSS pstest模块 的答案文件路径
+     * cache_psyDetails_key
      */
-    public static final String OSS_FILEPATH_PREFIX = "https://" + OSSClientUtil.BUCKET_NAME + "."
-            + OSSClientUtil.END_POINT + "/" + "mood-pstest/result/";
+    public static final String CACHE_PSY_DETAILS_KEY = "PSY_TEST_DETAILS:";
+    public static final Long CACHE_PSY_TTL = 60L;
+    public static final Long CACHE_NULL_TTL = 5L;
+
+
 }

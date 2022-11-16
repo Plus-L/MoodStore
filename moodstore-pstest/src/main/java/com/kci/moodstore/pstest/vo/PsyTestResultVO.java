@@ -13,7 +13,7 @@ public class PsyTestResultVO {
 
     private String title;
 
-    private String imgUrl;
+    private String imageUrl;
 
     private String result;
 
