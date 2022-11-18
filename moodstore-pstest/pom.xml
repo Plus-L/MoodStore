@@ -41,10 +41,15 @@
             </exclusions>
         </dependency>
 
-        <!-- 导入moodstore-user类 -->
+        <!-- 导入moodstore-framework类 -->
         <dependency>
             <groupId>com.kci.moodstore</groupId>
-            <artifactId>moodstore-user</artifactId>
+            <artifactId>moodstore-framework-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kci.moodstore</groupId>
+            <artifactId>moodstore-framework-cache</artifactId>
             <version>1.0.0</version>
         </dependency>
 
@@ -71,6 +76,12 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-ecs</artifactId>
             <version>4.17.6</version>
+        </dependency>
+
+        <!-- Quartz定时器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
     </dependencies>
 

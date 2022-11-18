@@ -1,33 +1,46 @@
 package com.kci.moodstore.pstest.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kci.moodstore.framework.common.result.CommonResult;
 import com.kci.moodstore.pstest.model.PsychometricTest;
+import com.kci.moodstore.pstest.vo.PsychometricTestVO;
+
+import java.util.List;
 
 public interface PsychometricTestService extends IService<PsychometricTest> {
+    /**
+     * 点赞
+     * @param psyTestId 测试id
+     * @return ？
+     */
+    CommonResult<Boolean> liked(Long userId, Long psyTestId);
 
     /**
-     *  用户端
-     *      1. 用户点击喜欢，能在我的喜欢中找到
-     *      2. 用户测试完成将测试的结果保存到数据库
-     *      3. 用户点击封面，从数据库和阿里云中拿到图片url（第一次点击，以后就直接缓存拿），将整个测试的属性保存到缓存，再呈现给用户
-     *      4. 用户点击开始测试，根据测试Id从阿里云拿到Json.txt转成列表返回给前端
-     *      5. 能根据测试type返回不同的各种测试
-     *      6. 能根据（名称 or Id），查找到测试详情
-     *      ....
-     *      暂时只想到这一些
+     * 查看点赞收藏的列表
+     * @param userId 用户id
+     * @return 点赞文章列表
      */
-
+    CommonResult<List<PsychometricTestVO>> getByLiked(Long userId);
 
     /**
-     *  管理员端
-     *      1. 带图片的添加，题目保存为Json.txt存在阿里OSS
-     *      2. 删除
-     *      3. 修改
-     *      4. 各种查询
-     *      5. 带状态的修改
-     *      ....
-     *      暂时只想到这一些
+     * 点击查看测试的详情页（未开始测试的状态）
+     * @param testId 测试ID
+     * @return 心理测试详情
      */
+    CommonResult<PsychometricTestVO> getPsyTestDetails(Long testId);
 
+    /**
+     * 点击开始测试，就从阿里云OSS拿到txt文档转化成json返回，并存入redis
+     * @param testId 测试ID
+     * @return 题目
+     */
+    CommonResult<?> getQuestionsByOSS(Long testId);
+
+    /**
+     *  能根据 type 获得不同的各种测试List
+     * @param type type
+     * @return 测试VO集合
+     */
+    CommonResult<List<PsychometricTestVO>> getPsyTestByType(Integer type);
 
 }

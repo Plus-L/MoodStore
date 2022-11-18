@@ -22,7 +22,6 @@ import java.util.List;
 @Component
 public class RedisUtil {
 
-
     @Autowired
     JedisPool jedisPool;
 

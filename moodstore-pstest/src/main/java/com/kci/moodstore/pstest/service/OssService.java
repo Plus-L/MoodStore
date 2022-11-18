@@ -9,6 +9,12 @@ public interface OssService {
      * @param file 文件
      * @return 返回成功与否
      */
-    String publishFileToOSS(MultipartFile file, String filename);
+    //String publishFileToOSS(MultipartFile file, String filename);
 
+    /**
+     * 从阿里云OSS中获取txt文档中的内容
+     * @param filePath 阿里云文件路径
+     * @return 文件内容
+     */
+    String getFileContent(String filePath);
 }

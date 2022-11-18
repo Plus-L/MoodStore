@@ -1,6 +1,8 @@
 package com.kci.moodstore.framework.common.constant;
 
 
+import com.kci.moodstore.framework.common.util.OSSClientUtil;
+
 /**
  * @program: seckill-framework
  * @description: 常用字段类

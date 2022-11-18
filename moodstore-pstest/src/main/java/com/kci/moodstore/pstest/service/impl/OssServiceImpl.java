@@ -1,39 +1,56 @@
 package com.kci.moodstore.pstest.service.impl;
 
-import cn.hutool.core.date.DateTime;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.OSSObject;
+import com.kci.moodstore.framework.common.constant.CommonConstant;
 import com.kci.moodstore.framework.common.util.OSSClientUtil;
 import com.kci.moodstore.pstest.service.OssService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Service
+@Slf4j
 public class OssServiceImpl implements OssService {
 
+    public String endPoint = OSSClientUtil.END_POINT;
+    public String accessKeyId = OSSClientUtil.ACCESS_KEY_ID;
+    public String accessKeySecret = OSSClientUtil.ACCESS_KEY_SECRET;
+    public String bucketName = OSSClientUtil.BUCKET_NAME;
+
     @Override
-    public String publishFileToOSS(MultipartFile file, String filename) {
-        // 工具类取值
-        String endPoint = OSSClientUtil.END_POINT;
-        String accessKeyId = OSSClientUtil.ACCESS_KEY_ID;
-        String accessKeySecret = OSSClientUtil.ACCESS_KEY_SECRET;
-        String bucketName = OSSClientUtil.BUCKET_NAME;
+    public String getFileContent(String filePath) {
+        // 创建OSSClient实例
+        OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
+        OSSObject ossObject = ossClient.getObject(bucketName, filePath);
         try {
-            // 创建OSS实例
-            OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            // 上传文件流
-            InputStream inputStream = file.getInputStream();
-            filename = "mood-pstest/frontcover" + filename;
-            // 调用oss方法实现上传
-            ossClient.putObject(bucketName, filename, inputStream);
-            // 关闭ossClient
-            ossClient.shutdown();
-            // 把上传之后的文件路径返回  需要符合阿里云oss的上传路径
-            return "https://" + bucketName + "." + endPoint + "/" + filename;
+            return this.readStream2Str(ossObject.getObjectContent());
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            log.warn("方法 [getFileContent] 异常 异常信息：", e);
+            return "从阿里云获取内容失败";
+        }
+    }
+
+    public String readStream2Str(InputStream in) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            while ((len = in.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, len);
+            }
+            return byteArrayOutputStream.toString();
+        } catch (IOException e) {
+            log.warn("方法 [readStream2Str] 异常 异常信息：", e);
+            return "文件流转换内容失败";
+        } finally {
+            in.close();
+            byteArrayOutputStream.close();
         }
     }
 }
