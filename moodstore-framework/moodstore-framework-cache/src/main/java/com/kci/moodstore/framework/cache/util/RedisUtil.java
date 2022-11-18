@@ -204,7 +204,7 @@ public class RedisUtil {
             long ret = jedis.del(key);
             return ret > 0;
         } catch (Exception e) {
-            log.error("Jedis Error happen when 'delete' keyPrefix: {} key: {}", key, e);
+            log.error("Jedis Error happen when 'delete' key: {}", key, e);
             return false;
         } finally {
             returnToPool(jedis);

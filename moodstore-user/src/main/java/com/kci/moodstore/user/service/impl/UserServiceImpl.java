@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
      */
     private void clearCache(Long userId) {
         String redisKey = RedisKeyUtil.getUserKey(userId);
-        redisTemplate.delete(redisKey);
+        redisUtil.delete(redisKey);
     }
 
 }

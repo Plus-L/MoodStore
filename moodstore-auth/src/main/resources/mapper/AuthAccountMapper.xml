@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kci.moodstore.auth.mapper.AuthAccountMapper">
+    <resultMap id="BaseResultMap" type="com.kci.moodstore.auth.model.AuthAccount">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="username" property="userName" />
+        <result column="password" property="password" />
+        <result column="status" property="status" />
+        <result column="type" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `id`, create_time, update_time, username, `password`, `status`, `type`,
+    </sql>
+
+    <select id="getAuthAccountInVerifyByInputUserName" resultType="com.kci.moodstore.auth.bo.AuthAccountInVerifyBO">
+        select id, password, type, status from mood_user
+        where status != -1
+        <if test="inputUserNameType == 1">
+            and username = #{inputUserName}
+        </if>
+        # 这里没有处理手机号登录的情况
+        <if test="inputUserNameType == 3">
+            and username = #{inputUserName}
+        </if>
+
+    </select>
+    <select id="getByUserIdAndType" resultMap="BaseResultMap">
+        select id, username, `password`, `status` , `type` from mood_user where id = #{id} and type = #{type}
+    </select>
+
+    <select id="getAuthAccountByUserName" resultMap="BaseResultMap">
+        select id, username, `password`, `status` , `type` from mood_user where username = #{userName}
+    </select>
+
+</mapper>

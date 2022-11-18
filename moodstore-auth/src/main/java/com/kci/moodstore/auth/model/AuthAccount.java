@@ -1,21 +1,23 @@
-package com.kci.moodstore.user.model;
+package com.kci.moodstore.auth.model;
 
 import com.kci.moodstore.framework.common.model.BaseModel;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
-
+import java.util.List;
 
 /**
- * @program: moodstore-appointment
- * @description: 用户实体模型
+ * @program: moodstore
+ * @description: 认证账号实体
  * @author: PlusL
- * @create: 2022-10-15 17:10
+ * @create: 2022-11-10 21:32
  **/
 @Getter
 @Setter
 @ToString
-public class User extends BaseModel implements Serializable {
+public class AuthAccount extends BaseModel implements Serializable {
 
     /**
      * 用户ID
@@ -25,22 +27,12 @@ public class User extends BaseModel implements Serializable {
     /**
      * 用户名
      */
-    private String username;
+    private String userName;
 
     /**
      * 密码
      */
     private String password;
-
-    /**
-     * 手机
-     */
-    private Integer phone;
-
-    /**
-     * 邮箱
-     */
-    private String email;
 
     /**
      * 用户类型：1 - 普通用户 | 0 - 管理员
@@ -53,13 +45,9 @@ public class User extends BaseModel implements Serializable {
     private Integer status;
 
     /**
-     * 激活码
+     * 角色
      */
-    private String activationCode;
+    private List<String> roles;
 
-    /**
-     * 头像
-     */
-    private String headerUrl;
 
 }

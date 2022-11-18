@@ -34,8 +34,10 @@ public enum ResultStatus {
      * 注册登录
      */
     RESIGETR_SUCCESS("20000", "注册成功!"),
-    RESIGETER_FAIL("200001", "注册失败!"),
-    CODE_FAIL("200002", "验证码不一致!"),
+    RESIGETER_FAIL("20001", "注册失败!"),
+    CODE_FAIL("20002", "验证码不一致!"),
+    UNAUTHORIZED_NOT_LOGIN("20003", "尚未登录，无权访问"),
+    UNAUTHORIZED_NOAUTH("20004", "权限不足，无权访问"),
 
     /**
      * check
@@ -44,14 +46,16 @@ public enum ResultStatus {
     ACCESS_LIMIT_REACHED("30002", "请求非法!"),
     REQUEST_ILLEGAL("30004", "访问太频繁!"),
     SESSION_ERROR("30005", "Session不存在或者已经失效!"),
-    PASSWORD_EMPTY("30006", "登录密码不能为空!"),
-    MOBILE_EMPTY("30007", "手机号不能为空!"),
-    MOBILE_ERROR("30008", "手机号格式错误!"),
-    MOBILE_NOT_EXIST("30009", "账号不存在!"),
-    PASSWORD_ERROR("30010", "密码错误!"),
-    USER_NOT_EXIST("30011", "用户不存在！"),
-    NICKNAME_OR_PASSWORD_ERROR("30012", "用户名或密码有误"),
-    TOKEN_ERROR("30013", "token不存在或已失效，请重新登录"),
+    USERNAME_EMPTY("30006", "用户名不能为空!"),
+    PASSWORD_EMPTY("30007", "登录密码不能为空!"),
+    MOBILE_EMPTY("30008", "手机号不能为空!"),
+    MOBILE_ERROR("30009", "手机号格式错误!"),
+    MOBILE_NOT_EXIST("30010", "账号不存在!"),
+    PASSWORD_ERROR("30011", "密码错误!"),
+    USER_NOT_EXIST("30012", "用户不存在！"),
+    NICKNAME_OR_PASSWORD_ERROR("30013", "用户名或密码有误"),
+    TOKEN_ERROR("30014", "token不存在或已失效，请重新登录"),
+    USERNAME_ERROR("30015", "请输入正确的用户名"),
 
     /**
      * 消息队列

@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   moodstore-mysql:
@@ -23,7 +23,7 @@ services:
       - 6379:6379
 
   moodstore-nacos:
-    image: nacos/nacos-server:2.0.2
+    image: nacos/nacos-server:1.4.1
     container_name: moodstore-nacos
     restart: always
     depends_on:
@@ -38,10 +38,10 @@ services:
       - MODE=standalone
       - PREFER_HOST_MODE=hostname
       - SPRING_DATASOURCE_PLATFORM=mysql
-      - MYSQL_SERVICE_HOST=114.132.247.187
+      - MYSQL_SERVICE_HOST=114.132.235.2
       - MYSQL_SERVICE_DB_NAME=moodstore_nacos
       - MYSQL_SERVICE_USER=root
-      - MYSQL_SERVICE_PASSWORD=root
+      - MYSQL_SERVICE_PASSWORD=123456
     volumes:
       - ./nacos/logs:/home/nacos/logs
 
@@ -60,6 +60,7 @@ services:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
 
+# ElasticSearch依赖项
   moodstore-kibana:
     image: kibana:7.13.2
     container_name: moodstore-kibana

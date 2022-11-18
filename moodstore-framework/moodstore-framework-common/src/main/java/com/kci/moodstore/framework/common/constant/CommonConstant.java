@@ -14,5 +14,8 @@ public class CommonConstant {
      */
     public static final String COOKIE_NAME_TOKEN = "TOKEN";
 
+    public static final Integer TOKEN_ADMIN_EXPIRE = 3600 * 24 * 2;
+
+    public static final Integer TOKEN_NORMALUSER_EXPIRE = 3600 * 24;
 
 }
