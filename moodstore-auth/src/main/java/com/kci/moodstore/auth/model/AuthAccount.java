@@ -45,6 +45,11 @@ public class AuthAccount extends BaseModel implements Serializable {
     private Integer status;
 
     /**
+     * 客户端ID
+     */
+    private String clientId;
+
+    /**
      * 角色
      */
     private List<String> roles;

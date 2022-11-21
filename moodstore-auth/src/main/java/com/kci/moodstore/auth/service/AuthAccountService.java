@@ -35,6 +35,6 @@ public interface AuthAccountService {
      * @param userName 用户名
      * @return 平台唯一用户
      */
-    AuthAccount getAuthAccountByUserName(String userName);
+    CommonResult<AuthAccount> getAuthAccountByUserName(String userName);
 
 }

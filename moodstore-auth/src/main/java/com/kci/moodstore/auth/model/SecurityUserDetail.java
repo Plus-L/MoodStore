@@ -32,6 +32,12 @@ public class SecurityUserDetail implements UserDetails {
      * 用户状态
      */
     private Boolean enabled;
+
+    /**
+     * 登录客户端ID
+     */
+    private String clientId;
+
     /**
      * 权限数据
      */

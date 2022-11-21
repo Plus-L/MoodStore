@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -21,6 +22,7 @@ import java.nio.charset.Charset;
  * @author: PlusL
  * @create: 2022-11-18 18:14
  **/
+@Component
 public class RestfulAccessDeniedHandler implements ServerAccessDeniedHandler {
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException denied) {

@@ -24,9 +24,14 @@ public class MoodWebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/rsa/publicKey").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/oauth/token").permitAll()
                 .anyRequest().authenticated();
     }
 
+
+
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();

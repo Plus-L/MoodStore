@@ -30,7 +30,7 @@
         select id, username, `password`, `status` , `type` from mood_user where id = #{id} and type = #{type}
     </select>
 
-    <select id="getAuthAccountByUserName" resultMap="BaseResultMap">
+    <select id="getAuthAccountByUserName" resultMap="BaseResultMap" resultType="com.kci.moodstore.auth.model.AuthAccount">
         select id, username, `password`, `status` , `type` from mood_user where username = #{userName}
     </select>
 

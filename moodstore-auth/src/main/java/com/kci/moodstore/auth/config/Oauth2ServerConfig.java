@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * @program: moodstore
- * @description:
+ * @description: Oauth2服务配置类，为授权服务的核心配置
  * @author: PlusL
  * @create: 2022-11-17 20:40
  **/
@@ -40,12 +40,21 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("client-app")
+                // 管理员APP（尚未启动）
+                .withClient("admin-app")
                 .secret(passwordEncoder.encode("123456"))
                 .scopes("all")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
-                .refreshTokenValiditySeconds(86400);
+                .accessTokenValiditySeconds(3600*24)
+                .refreshTokenValiditySeconds(3600*24*7)
+                .and()
+                // 常规入口APP
+                .withClient("portal-app")
+                .secret(passwordEncoder.encode("123456"))
+                .scopes("all")
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(3600*24)
+                .refreshTokenValiditySeconds(3600*24*7);
     }
 
     @Override

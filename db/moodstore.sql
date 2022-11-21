@@ -93,8 +93,7 @@ DROP TABLE IF EXISTS `mood_user`;
 CREATE TABLE `mood_user`  (
   `id` bigint unsigned NOT NULL COMMENT '全平台用户唯一id',
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `salt` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `type` int(0) NULL DEFAULT NULL COMMENT '0-普通用户; 1-超级管理员; 2-版主;',
   `status` int(0) NULL DEFAULT NULL COMMENT '0-未激活; 1-已激活;',

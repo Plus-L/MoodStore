@@ -40,9 +40,9 @@ public class AuthSimpleTest {
     @Test
     public void authServiceTest() {
         System.out.println(authAccountService
-                .getUserInfoInTokenByInputUserNameAndPassword("PlusL", "123456"));
+                .getUserInfoInTokenByInputUserNameAndPassword("plusl", "123456"));
 
-        System.out.println(authAccountService.getAuthAccountByUserName("PlusL"));
+        System.out.println(authAccountService.getAuthAccountByUserName("plusl"));
     }
 
     @Test

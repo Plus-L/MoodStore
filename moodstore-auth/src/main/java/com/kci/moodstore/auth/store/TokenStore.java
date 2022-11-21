@@ -23,6 +23,7 @@ import java.util.List;
  **/
 @Component
 // 配置变化时，RefreshScope的 Bean 会被刷新。
+@Deprecated
 @RefreshScope
 public class TokenStore {
 
@@ -33,16 +34,16 @@ public class TokenStore {
 
     /**
      * 将用户的部分信息存储在token中，并返回token信息
+     * UPDATE: 权限认证方案更新，采用SpringSecurity + jwt + oauth2。不再需要token存用户信息
      * @param userInfoInToken 用户在token中的信息
      * @return token信息
      */
     public TokenInfoBO storeAccessToken(UserInfoInTokenBO userInfoInToken) {
-        TokenInfoBO tokenInfoBO = new TokenInfoBO();
+/*        TokenInfoBO tokenInfoBO = new TokenInfoBO();
         String accessToken = IdUtil.simpleUUID();
         String refreshToken = IdUtil.simpleUUID();
 
         tokenInfoBO.setUserInfoInToken(userInfoInToken);
-        // TODO: 细分TOKEN过期时间，目前统一 ：一天
         tokenInfoBO.setExpiresIn(CommonConstant.TOKEN_NORMALUSER_EXPIRE);
 
 
@@ -52,7 +53,9 @@ public class TokenStore {
         // 新的token数据
         existsAccessTokens.add(accessToken + StrUtil.COLON + refreshToken);
 
-        return tokenInfoBO;
+        return tokenInfoBO;*/
+
+        return null;
 
     }
 }
