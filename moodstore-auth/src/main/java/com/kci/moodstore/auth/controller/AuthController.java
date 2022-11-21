@@ -58,6 +58,7 @@ public class AuthController {
                 .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
                 .expiresIn(oAuth2AccessToken.getExpiresIn())
                 .tokenHead("Bearer ").build();
+
         log.warn(JSON.toJSONString(oauth2TokenDto));
 
         return CommonResult.success(oauth2TokenDto);
