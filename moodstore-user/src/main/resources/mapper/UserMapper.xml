@@ -19,42 +19,42 @@
     </resultMap>
 
     <sql id = "insertFields">
-        username, password, phone, email, type, status, activation_code, header_url, create_time, update_time
+        username, password, mobile, email, status, icon, create_time, update_time
     </sql>
 
     <sql id = "fullField">
-        id, username, password, phone, email, type, status, activation_code, header_url, create_time, update_time
+        id, username, password, mobile, email, status, icon, create_time, update_time
     </sql>
 
     <select id="getUserById" resultType="com.kci.moodstore.user.model.User">
         select <include refid="fullField"></include>
-        from mood_user
+        from user
         where id = #{id}
     </select>
 
     <select id="getByUserName" resultType="com.kci.moodstore.user.model.User">
         select <include refid="fullField"></include>
-        from mood_user
+        from user
         where username = #{username}
     </select>
 
     <insert id="insertUser" parameterType="com.kci.moodstore.user.model.User" keyProperty="id">
-        insert into mood_user (<include refid="insertFields"></include>)
+        insert into user (<include refid="insertFields"></include>)
         values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime}, #{updateTime})
     </insert>
 
     <update id="updateStatus">
-        update mood_user set status = #{status} where id = #{id}
+        update user set status = #{status} where id = #{id}
     </update>
 
     <select id="list" resultType="com.kci.moodstore.user.model.User">
         select <include refid="fullField"></include>
-        from mood_user order by id desc
+        from user order by id desc
     </select>
 
     <select id="getUsersByIds" resultType="com.kci.moodstore.user.model.User">
         select <include refid="fullField"></include>
-        from mood_user
+        from user
         where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}

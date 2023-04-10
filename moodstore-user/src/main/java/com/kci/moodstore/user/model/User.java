@@ -35,31 +35,23 @@ public class User extends BaseModel implements Serializable {
     /**
      * 手机
      */
-    private Integer phone;
+    private Integer mobile;
 
     /**
      * 邮箱
      */
     private String email;
 
-    /**
-     * 用户类型：1 - 普通用户 | 0 - 管理员
-     */
-    private Integer type;
 
     /**
      * 用户状态：1 正常 | 0 无效
      */
     private Integer status;
 
-    /**
-     * 激活码
-     */
-    private String activationCode;
 
     /**
      * 头像
      */
-    private String headerUrl;
+    private String avater;
 
 }

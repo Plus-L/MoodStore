@@ -4,6 +4,7 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointR
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,12 +25,9 @@ public class MoodWebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/rsa/publicKey").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 .anyRequest().authenticated();
     }
-
-
 
     @Bean
     @Override

@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson2.JSON;
 import com.kci.moodstore.framework.cache.util.RedisKeyUtil;
-import com.kci.moodstore.framework.cache.util.RedisUtil;
+import com.kci.moodstore.framework.cache.RedisService;
 import com.kci.moodstore.framework.database.dto.PageDTO;
 import com.kci.moodstore.framework.database.util.PageUtil;
 import com.kci.moodstore.framework.database.vo.PageVO;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @program: moodstore
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisService redisService;
 
     @Override
     public UserDTO getUserById(Long id) {
@@ -69,7 +68,7 @@ public class UserServiceImpl implements UserService {
      */
     private User getCache(Long userId) {
         String redisKey = RedisKeyUtil.getUserKey(userId);
-        return JSON.parseObject(redisUtil.get(redisKey), User.class);
+        return (User) redisTemplate.opsForValue().get(redisKey);
 //        return (User) redisTemplate.opsForValue().get(redisKey);
     }
 
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.getUserById(userId);
         String redisKey = RedisKeyUtil.getUserKey(userId);
 //        redisTemplate.opsForValue().set(redisKey, user, 3600, TimeUnit.SECONDS);
-        redisUtil.set(redisKey, user, 3600L);
+        redisService.set(redisKey, user, 3600L);
         return user;
     }
 
@@ -92,7 +91,7 @@ public class UserServiceImpl implements UserService {
      */
     private void clearCache(Long userId) {
         String redisKey = RedisKeyUtil.getUserKey(userId);
-        redisUtil.delete(redisKey);
+        redisTemplate.delete(redisKey);
     }
 
 }

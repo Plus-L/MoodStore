@@ -1,4 +1,4 @@
-package com.kci.moodstore.auth.model;
+package com.kci.moodstore.framework.common.dto;
 
 import com.kci.moodstore.framework.common.model.BaseModel;
 import lombok.Getter;
@@ -33,11 +33,6 @@ public class AuthAccount extends BaseModel implements Serializable {
      * 密码
      */
     private String password;
-
-    /**
-     * 用户类型：1 - 普通用户 | 0 - 管理员
-     */
-    private Integer type;
 
     /**
      * 用户状态：1 正常 | 0 无效

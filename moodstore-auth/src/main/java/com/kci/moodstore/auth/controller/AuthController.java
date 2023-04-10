@@ -2,8 +2,9 @@ package com.kci.moodstore.auth.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.kci.moodstore.auth.bo.TokenInfoBO;
+import com.kci.moodstore.framework.common.constant.AuthConstant;
 import com.kci.moodstore.framework.common.result.CommonResult;
-import io.swagger.annotations.ApiParam;
+import jdk.nashorn.internal.parser.Token;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,12 +38,12 @@ public class AuthController {
      */
     @RequestMapping(value = "/token", method = RequestMethod.POST)
     public CommonResult<TokenInfoBO> postAccessToken(HttpServletRequest request,
-                                                        @ApiParam("授权模式") @RequestParam String grant_type,
-                                                        @ApiParam("Oauth2客户端ID") @RequestParam String client_id,
-                                                        @ApiParam("Oauth2客户端秘钥") @RequestParam String client_secret,
-                                                        @ApiParam("刷新token") @RequestParam(required = false) String refresh_token,
-                                                        @ApiParam("登录用户名") @RequestParam(required = false) String username,
-                                                        @ApiParam("登录密码") @RequestParam(required = false) String password) throws HttpRequestMethodNotSupportedException {
+                                                        @RequestParam String grant_type,
+                                                        @RequestParam String client_id,
+                                                        @RequestParam String client_secret,
+                                                        @RequestParam(required = false) String refresh_token,
+                                                        @RequestParam(required = false) String username,
+                                                        @RequestParam(required = false) String password) throws HttpRequestMethodNotSupportedException {
 
         Map<String, String> parameters = new HashMap<>();
         parameters.put("grant_type",grant_type);
@@ -57,7 +57,7 @@ public class AuthController {
                 .accessToken(oAuth2AccessToken.getValue())
                 .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
                 .expiresIn(oAuth2AccessToken.getExpiresIn())
-                .tokenHead("Bearer ").build();
+                .tokenHead(AuthConstant.JWT_TOKEN_PREFIX).build();
 
         log.warn(JSON.toJSONString(oauth2TokenDto));
 

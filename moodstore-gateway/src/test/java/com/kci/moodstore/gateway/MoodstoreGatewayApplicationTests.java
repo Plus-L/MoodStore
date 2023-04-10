@@ -1,13 +1,17 @@
 package com.kci.moodstore.gateway;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootTest
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@Configuration
 class MoodstoreGatewayApplicationTests {
 
     @Test
     void contextLoads() {
     }
+
 
 }

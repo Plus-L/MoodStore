@@ -1,6 +1,6 @@
 package com.kci.moodstore.auth.mapper;
 
-import com.kci.moodstore.auth.model.AuthAccount;
+import com.kci.moodstore.framework.common.dto.AuthAccount;
 import com.kci.moodstore.auth.bo.AuthAccountInVerifyBO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

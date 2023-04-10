@@ -1,5 +1,6 @@
 package com.kci.moodstore.auth.model;
 
+import com.kci.moodstore.framework.common.dto.AuthAccount;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -52,7 +53,7 @@ public class SecurityUserDetail implements UserDetails {
         this.setUserName(authAccount.getUserName());
         this.setPassword(authAccount.getPassword());
         this.setEnabled(authAccount.getStatus() == 1);
-        if (authAccount.getType() != null) {
+        if (authAccount.getRoles() != null) {
             authorities = new ArrayList<>();
             authAccount.getRoles().forEach(item -> authorities.add(new SimpleGrantedAuthority(item)));
         }

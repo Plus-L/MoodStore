@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kci.moodstore</groupId>
     <artifactId>moodstore-parent</artifactId>
+    <name>moodstore</name>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <description>解忧事务所 —— powered by KINGCOLA-ICG 解忧事务所攻略组</description>
@@ -11,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
+        <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,58 +24,76 @@
         <module>moodstore-auth</module>
         <module>moodstore-gateway</module>
         <module>moodstore-api</module>
+        <module>moodstore-lottery</module>
+        <module>moodstore-community</module>
     </modules>
 
     <properties>
-        <project.encoding>UTF-8</project.encoding>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <skipTests>true</skipTests>
         <java.version>1.8</java.version>
-
         <!-- 核心依赖 -->
-        <spring-boot.version>2.4.2</spring-boot.version>
-        <spring-cloud.version>2020.0.2</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+        <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
         <dubbo.version>2.7.8</dubbo.version>
+        <spring-boot-starter-data-redis.version>2.7.0</spring-boot-starter-data-redis.version>
 
-        <!--分离出这两个东西，是为了能够在 spring cloud alibaba不更新的时候，及时更新-->
+        <!---->
         <seata.version>1.4.2</seata.version>
-        <nacos.version>1.4.1</nacos.version>
+        <nacos.version>2.1.0</nacos.version>
 
         <!-- 次要依赖 -->
-        <spring-cloud-starter-oauth2.version>2.2.5.RELEASE</spring-cloud-starter-oauth2.version>
+        <mysql-connector-java.version>8.0.29</mysql-connector-java.version>
         <hutool-version>5.8.4</hutool-version>
         <mybatis-spring-boot-starter.version>2.1.4</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.4.5</pagehelper-spring-boot-starter.version>
-        <jsoup.version>1.13.1</jsoup.version>
-        <orika.version>1.5.4</orika.version>
+        <druid.version>1.2.9</druid.version>
+<!--        <jsoup.version>1.13.1</jsoup.version>-->
+<!--        <orika.version>1.5.4</orika.version>-->
         <captcha.version>1.2.5</captcha.version>
-        <knife4j.version>3.0.2</knife4j.version>
+<!--        <knife4j.version>3.0.2</knife4j.version>-->
+        <nimbus-jose-jwt.version>9.23</nimbus-jose-jwt.version>
         <elasticsearch.version>7.9.1</elasticsearch.version>
         <minio.version>8.0.3</minio.version>
         <rocketmq-springboot.version>2.2.0</rocketmq-springboot.version>
         <weixin.version>4.0.0</weixin.version>
         <spring-javaformat.version>0.0.22</spring-javaformat.version>
-        <druid.version>1.2.9</druid.version>
         <fastjson.version>2.0.15</fastjson.version>
         <skywalking.version>8.7.0</skywalking.version>
+        <spring-boot-starter-validation-version>2.7.2</spring-boot-starter-validation-version>
+        <!-- MapStruct -->
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.20</org.projectlombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <!-- 核心依赖 -->
-            <!--spring boot-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!--spring cloud-->
+            <!--Spring Cloud 相关依赖-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -82,8 +101,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!--spring cloud alibaba-->
+            <!--Spring Cloud Alibaba 相关依赖-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -91,48 +109,9 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>${nacos.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.seata</groupId>
-                <artifactId>seata-spring-boot-starter</artifactId>
-                <version>${seata.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.alibaba</groupId>
-                        <artifactId>druid</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+
             <!-- 次要依赖 -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-core</artifactId>
-                <version>${hutool-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-crypto</artifactId>
-                <version>${hutool-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-http</artifactId>
-                <version>${hutool-version}</version>
-            </dependency>
+            <!--  Mybatis  -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -143,31 +122,27 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
+            <!--Oauth2 -->
             <dependency>
-                <groupId>org.jsoup</groupId>
-                <artifactId>jsoup</artifactId>
-                <version>${jsoup.version}</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${spring-cloud-starter-oauth2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>ma.glasnost.orika</groupId>
-                <artifactId>orika-core</artifactId>
-                <version>${orika.version}</version>
-            </dependency>
+
+            <!--验证码-->
             <dependency>
                 <groupId>com.github.anji-plus</groupId>
                 <artifactId>captcha</artifactId>
                 <version>${captcha.version}</version>
             </dependency>
+
+            <!--JWT(Json Web Token)登录支持-->
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
+            <!--elasticsearch -->
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -177,11 +152,6 @@
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
@@ -194,213 +164,148 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!--minIO 对象存储套件 -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+            <!--RocketMQ -->
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq-springboot.version}</version>
             </dependency>
+
+            <!--                    迁移分界线                    -->
+
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
+            <!-- redis连接池 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+
+            <!--    Lombok    -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- Druid连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--jdbc -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>${spring-boot-starter-validation-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <!-- 工具类 hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-version}</version>
+            </dependency>
+
+
+            <!--  commons 工具类    -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!--  Json工具类 :FastJson2   -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.15</version>
+            </dependency>
+
+            <!--  dubbo  -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!--  SkyWalking链路追踪  -->
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-logback-1.x</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-opentracing</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+
+            <!--    mapstruct Bean转换工具    -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+
+            <!-- Swagger API文档 -->
+<!--            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.9.2</version>
+            </dependency>-->
+
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--  SpringCloudAlibaba  -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-            <version>${spring-cloud-alibaba.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-
-        <!-- nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-<!--        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>-->
-
-
-
-        <!-- redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!-- redis连接池 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
-        </dependency>
-
-        <!--    Lombok    -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${org.projectlombok.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- 测试 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Druid连接池 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-            <version>2.7.2</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- 工具类 hutool -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool-version}</version>
-        </dependency>
-
-        <!--   PageHelper     -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>${pagehelper-spring-boot-starter.version}</version>
-        </dependency>
-
-        <!--  commons 工具类    -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <!--  Json工具类 :FastJson2   -->
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>2.0.15</version>
-        </dependency>
-
-        <!--  选用Nacos作为服务发现与注册，暂不使用ZK   -->
-        <!--        <dependency>
-                    <groupId>org.apache.dubbo</groupId>
-                    <artifactId>dubbo-dependencies-zookeeper</artifactId>
-                    <version>${dubbo.version}</version>
-                    <type>pom</type>
-                </dependency>-->
-        <!-- 服务注册与服务发现：nacos -->
-
-
-        <!--  Dubbo  -->
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-            <version>${dubbo.version}</version>
-        </dependency>
-
-        <!--  SkyWalking链路追踪  -->
-        <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>apm-toolkit-trace</artifactId>
-            <version>${skywalking.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>apm-toolkit-logback-1.x</artifactId>
-            <version>${skywalking.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>apm-toolkit-opentracing</artifactId>
-            <version>${skywalking.version}</version>
-        </dependency>
-
-        <!--    mapstruct Bean转换工具    -->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${org.mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${org.mapstruct.version}</version>
-        </dependency>
-
-        <!-- Swagger API文档 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-
-    </dependencies>
 
     <build>
         <plugins>

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.dubbo.rpc.RpcException;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -41,7 +42,6 @@ import static com.kci.moodstore.framework.common.result.ResultStatus.*;
  * @author LJH
  */
 @RestControllerAdvice
-@NoArgsConstructor
 @Slf4j
 public class GlobalExceptionHandler {
 

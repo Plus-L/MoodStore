@@ -1,7 +1,7 @@
 package com.kci.moodstore.pstest;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.kci.moodstore.framework.cache.util.RedisUtil;
+import com.kci.moodstore.framework.cache.RedisService;
 import com.kci.moodstore.pstest.service.PsyTestResultService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +18,7 @@ public class PsyResultTest {
     private PsyTestResultService psyTestResultService;
 
     @Resource
-    private RedisUtil redisUtil;
+    private RedisService redisService;
 
     @Resource
     private StringRedisTemplate redisTemplate;
@@ -30,7 +30,7 @@ public class PsyResultTest {
 
     @Test
     void redisUtil() {
-        System.out.println(redisUtil);
+        System.out.println(redisService);
     }
 
     @Test

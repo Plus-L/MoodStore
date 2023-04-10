@@ -31,18 +31,17 @@ public class AuthSimpleTest {
 
     @Test
     public void simpleMapperTest() {
-        System.out.println(accountMapper
-                .getAuthAccountInVerifyByInputUserName(1, "PlusL"));
+        System.out.println(accountMapper.getAuthAccountInVerifyByInputUserName(1, "PlusL"));
 
-        System.out.println(accountMapper.getByUserIdAndType(1L, 1));
+//        System.out.println(accountMapper.getByUserIdAndType(1L, 1));
     }
 
     @Test
     public void authServiceTest() {
         System.out.println(authAccountService
-                .getUserInfoInTokenByInputUserNameAndPassword("plusl", "123456"));
+                .getUserInfoInTokenByInputUserNameAndPassword("PlusL", "123456"));
 
-        System.out.println(authAccountService.getAuthAccountByUserName("plusl"));
+        System.out.println(authAccountService.getAuthAccountByUserName("PlusL"));
     }
 
     @Test

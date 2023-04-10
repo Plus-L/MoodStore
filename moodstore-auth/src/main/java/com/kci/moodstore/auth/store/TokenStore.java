@@ -1,19 +1,13 @@
 package com.kci.moodstore.auth.store;
 
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
 import com.kci.moodstore.auth.api.bo.UserInfoInTokenBO;
-import com.kci.moodstore.framework.cache.util.RedisUtil;
-import com.kci.moodstore.framework.common.constant.CommonConstant;
+import com.kci.moodstore.framework.cache.RedisService;
 import com.kci.moodstore.auth.bo.TokenInfoBO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @program: moodstore
@@ -30,7 +24,7 @@ public class TokenStore {
     private static final Logger logger = LoggerFactory.getLogger(TokenStore.class);
 
     @Autowired
-    RedisUtil redisUtil;
+    RedisService redisService;
 
     /**
      * 将用户的部分信息存储在token中，并返回token信息
@@ -39,6 +33,7 @@ public class TokenStore {
      * @return token信息
      */
     public TokenInfoBO storeAccessToken(UserInfoInTokenBO userInfoInToken) {
+
 /*        TokenInfoBO tokenInfoBO = new TokenInfoBO();
         String accessToken = IdUtil.simpleUUID();
         String refreshToken = IdUtil.simpleUUID();

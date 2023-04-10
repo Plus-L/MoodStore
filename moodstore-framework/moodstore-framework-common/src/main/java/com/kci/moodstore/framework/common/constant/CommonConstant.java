@@ -4,7 +4,7 @@ package com.kci.moodstore.framework.common.constant;
 import com.kci.moodstore.framework.common.util.OSSClientUtil;
 
 /**
- * @program: seckill-framework
+ * @program: moodstore-framework-common
  * @description: 常用字段类
  * @author: PlusL
  * @create: 2022-07-25 14:27

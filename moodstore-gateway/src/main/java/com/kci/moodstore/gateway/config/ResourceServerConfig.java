@@ -4,7 +4,7 @@ import cn.hutool.core.util.ArrayUtil;
 import com.kci.moodstore.gateway.authentication.AuthorizationManager;
 import com.kci.moodstore.gateway.component.RestAuthenticationEntryPoint;
 import com.kci.moodstore.gateway.component.RestfulAccessDeniedHandler;
-import com.kci.moodstore.gateway.constant.AuthConstant;
+import com.kci.moodstore.framework.common.constant.AuthConstant;
 import com.kci.moodstore.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

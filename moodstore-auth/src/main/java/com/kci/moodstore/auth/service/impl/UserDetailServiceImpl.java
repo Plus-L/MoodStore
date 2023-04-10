@@ -1,6 +1,6 @@
 package com.kci.moodstore.auth.service.impl;
 
-import com.kci.moodstore.auth.model.AuthAccount;
+import com.kci.moodstore.framework.common.dto.AuthAccount;
 import com.kci.moodstore.auth.model.SecurityUserDetail;
 import com.kci.moodstore.auth.service.AuthAccountService;
 import com.kci.moodstore.framework.common.result.ResultStatus;
@@ -39,6 +39,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String clientId = request.getParameter("client_id");
+        // TODO:这里可用于处理不同权限的用户登录
         AuthAccount authAccount = authAccountService.getAuthAccountByUserName(username).getData();
 
         if (authAccount==null) {

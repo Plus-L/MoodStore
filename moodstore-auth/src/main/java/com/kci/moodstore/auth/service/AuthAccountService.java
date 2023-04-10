@@ -1,9 +1,8 @@
 package com.kci.moodstore.auth.service;
 
 import com.kci.moodstore.auth.api.bo.UserInfoInTokenBO;
-import com.kci.moodstore.auth.model.AuthAccount;
+import com.kci.moodstore.framework.common.dto.AuthAccount;
 import com.kci.moodstore.framework.common.result.CommonResult;
-import org.springframework.stereotype.Service;
 
 /**
  * @program: moodstore

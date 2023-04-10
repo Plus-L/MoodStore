@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kci.moodstore.auth.mapper.AuthAccountMapper">
-    <resultMap id="BaseResultMap" type="com.kci.moodstore.auth.model.AuthAccount">
+    <resultMap id="BaseResultMap" type="com.kci.moodstore.framework.common.dto.AuthAccount">
         <id column="id" property="id" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -11,11 +11,11 @@
         <result column="type" property="type"/>
     </resultMap>
     <sql id="Base_Column_List">
-        `id`, create_time, update_time, username, `password`, `status`, `type`,
+        `id`, create_time, update_time, username, `password`, `status`,
     </sql>
 
     <select id="getAuthAccountInVerifyByInputUserName" resultType="com.kci.moodstore.auth.bo.AuthAccountInVerifyBO">
-        select id, password, type, status from mood_user
+        select id, password, status from user
         where status != -1
         <if test="inputUserNameType == 1">
             and username = #{inputUserName}
@@ -27,11 +27,11 @@
 
     </select>
     <select id="getByUserIdAndType" resultMap="BaseResultMap">
-        select id, username, `password`, `status` , `type` from mood_user where id = #{id} and type = #{type}
+        select id, username, `password`, `status`  from user where id = #{id} and type = #{type}
     </select>
 
-    <select id="getAuthAccountByUserName" resultMap="BaseResultMap" resultType="com.kci.moodstore.auth.model.AuthAccount">
-        select id, username, `password`, `status` , `type` from mood_user where username = #{userName}
+    <select id="getAuthAccountByUserName" resultMap="BaseResultMap" resultType="com.kci.moodstore.framework.common.dto.AuthAccount">
+        select id, username, `password`, `status`  from user where username = #{userName}
     </select>
 
 </mapper>

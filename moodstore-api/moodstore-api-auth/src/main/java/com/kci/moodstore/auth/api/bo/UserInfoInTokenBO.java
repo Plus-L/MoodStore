@@ -30,7 +30,7 @@ public class UserInfoInTokenBO {
     /**
      * 用户类型：1 - 普通用户 | 0 - 管理员
      */
-    private Integer type;
+//    private Integer type;
 
     /**
      * 权限列表
