@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>moodstore-community</artifactId>
+		<groupId>com.kci</groupId>
+		<version>3.6.7</version>
+	</parent>
+
+	<artifactId>moodstore-community-biz</artifactId>
+	<packaging>jar</packaging>
+	<description>MoodStore 社区模块 服务层</description>
+
+	<dependencies>
+		<!--依赖umps，获取User信息-->
+
+		<!--必备: 依赖api模块-->
+		<dependency>
+			<groupId>com.kci</groupId>
+			<artifactId>moodstore-community-api</artifactId>
+			<version>3.6.7</version>
+		</dependency>
+		<!--jsoup 方便的H5操作库-->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<!--选配: orm 模块-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+		<!--必备：安全模块-->
+		<dependency>
+			<groupId>com.kci</groupId>
+			<artifactId>moodstore-common-security</artifactId>
+		</dependency>
+		<!--必备：服务处理-->
+		<dependency>
+			<groupId>com.kci</groupId>
+			<artifactId>moodstore-common-feign</artifactId>
+		</dependency>
+		<!--必备：日志处理-->
+		<dependency>
+			<groupId>com.kci</groupId>
+			<artifactId>moodstore-common-log</artifactId>
+		</dependency>
+		<!--必备：swagger-->
+		<dependency>
+			<groupId>com.kci</groupId>
+			<artifactId>moodstore-common-swagger</artifactId>
+		</dependency>
+		<!--必备: 注册中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!--必备: 配置中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<!--必备：undertow容器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,90 @@
+version: '3'
+services:
+  moodstore-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    container_name: moodstore-mysql
+    image: moodstore-mysql
+
+  moodstore-redis:
+    image: redis:7.0.0
+    restart: always
+    container_name: moodstore-redis
+    hostname: moodstore-redis
+
+  moodstore-register:
+    build:
+      context: ./moodstore-register
+    restart: always
+    ports:
+      - 8848:8848
+    container_name: moodstore-register
+    hostname: moodstore-register
+    image: moodstore-register
+
+  moodstore-gateway:
+    build:
+      context: ./moodstore-gateway
+    restart: always
+    ports:
+      - 9999:9999
+    container_name: moodstore-gateway
+    hostname: moodstore-gateway
+    image: moodstore-gateway
+
+  moodstore-auth:
+    build:
+      context: ./moodstore-auth
+    restart: always
+    container_name: moodstore-auth
+    hostname: moodstore-auth
+    image: moodstore-auth
+
+  moodstore-upms:
+    build:
+      context: ./moodstore-upms/moodstore-upms-biz
+    restart: always
+    container_name: moodstore-upms
+    hostname: moodstore-upms
+    image: moodstore-upms
+
+  moodstore-monitor:
+    build:
+      context: ./moodstore-visual/moodstore-monitor
+    restart: always
+    ports:
+      - 5001:5001
+    container_name: moodstore-monitor
+    hostname: moodstore-monitor
+    image: moodstore-monitor
+
+  moodstore-sentinel:
+    build:
+      context: ./moodstore-visual/moodstore-sentinel-dashboard
+    restart: always
+    image: moodstore-sentinel
+    container_name: moodstore-sentinel
+    ports:
+      - 5003:5003
+
+  moodstore-codegen:
+    build:
+      context: ./moodstore-visual/moodstore-codegen
+    restart: always
+    container_name: moodstore-codegen
+    hostname: moodstore-codegen
+    image: moodstore-codegen
+
+  moodstore-job:
+    build:
+      context: ./moodstore-visual/moodstore-xxl-job-admin
+    restart: always
+    container_name: moodstore-job
+    hostname: moodstore-job
+    image: moodstore-job
+    ports:
+      - 5004:5004

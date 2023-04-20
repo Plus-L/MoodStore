@@ -1,0 +1,7 @@
+com.kci.moodstore.common.security.service.MoodstoreUserDetailsServiceImpl
+com.kci.moodstore.common.security.service.MoodstoreAppUserDetailsServiceImpl
+com.kci.moodstore.common.security.service.MoodstoreRedisOAuth2AuthorizationService
+com.kci.moodstore.common.security.service.MoodstoreRedisOAuth2AuthorizationConsentService
+com.kci.moodstore.common.security.component.MoodstoreSecurityInnerAspect
+com.kci.moodstore.common.security.component.MoodstoreSecurityMessageSourceConfiguration
+com.kci.moodstore.common.security.service.MoodstoreRemoteRegisteredClientRepository

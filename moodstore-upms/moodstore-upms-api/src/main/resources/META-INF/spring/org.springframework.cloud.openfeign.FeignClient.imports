@@ -1,0 +1,7 @@
+com.kci.moodstore.admin.api.feign.RemoteClientDetailsService
+com.kci.moodstore.admin.api.feign.RemoteDictService
+com.kci.moodstore.admin.api.feign.RemoteDeptService
+com.kci.moodstore.admin.api.feign.RemoteLogService
+com.kci.moodstore.admin.api.feign.RemoteTokenService
+com.kci.moodstore.admin.api.feign.RemoteUserService
+com.kci.moodstore.admin.api.feign.RemoteParamService

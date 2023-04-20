@@ -1,0 +1,4 @@
+com.kci.moodstore.common.feign.MoodstoreFeignAutoConfiguration
+com.kci.moodstore.common.feign.MoodstoreFeignRetryAutoConfiguration
+com.kci.moodstore.common.feign.sentinel.SentinelAutoConfiguration
+com.kci.moodstore.common.feign.sentinel.handle.GlobalBizExceptionHandler

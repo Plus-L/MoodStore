@@ -1,0 +1,6 @@
+com.kci.moodstore.common.core.config.TaskExecutorConfiguration
+com.kci.moodstore.common.core.config.JacksonConfiguration
+com.kci.moodstore.common.core.config.RedisTemplateConfiguration
+com.kci.moodstore.common.core.config.RestTemplateConfiguration
+com.kci.moodstore.common.core.util.SpringContextHolder
+com.kci.moodstore.common.core.config.WebMvcConfiguration
