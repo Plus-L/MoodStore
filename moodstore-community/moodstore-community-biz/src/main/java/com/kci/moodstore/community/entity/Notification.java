@@ -64,7 +64,7 @@ public class Notification extends BaseEntity {
     /**
      * 动作: REPLY - 回复 | COMMENT - 评论 | COLLECT - 收藏 | TOPIC_UP - 置顶主题 | COMMENT_UP - 置顶评论
      */
-    @Schema(description ="动作: REPLY - 回复 | COMMENT - 评论 | COLLECT - 收藏 | TOPIC_UP - 置顶主题 | COMMENT_UP - 置顶评论")
+    @Schema(description ="动作")
     private String action;
 
     /**

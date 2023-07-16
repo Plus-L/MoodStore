@@ -32,9 +32,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @TableName("sensitive_word")
-@EqualsAndHashCode(callSuper = true)
-@Schema(description = "敏感词表")
-public class SensitiveWord extends BaseEntity {
+@EqualsAndHashCode
+@Schema(description = "敏感词")
+public class SensitiveWord {
 
     /**
      * id

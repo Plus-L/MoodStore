@@ -46,7 +46,7 @@
 				 left join user u on t.user_id = u.id
 				 left join user uu on c.user_id = uu.id
 		where c.user_id = #{userId}
-		order by t.in_time desc
+		order by t.create_time desc
 	</select>
 
 	<select id="selectByTopicId" resultType="com.kci.moodstore.community.entity.dto.CommentsByTopic">
@@ -54,7 +54,7 @@
 		from comment c
 				 left join user u on c.user_id = u.id
 		where c.topic_id = #{topicId}
-		order by c.in_time asc;
+		order by c.create_time asc;
 	</select>
 
 	<select id="selectAllForAdmin" resultType="map">
@@ -64,19 +64,19 @@
 		left join user u on u.id = c.user_id
 		<where>
 			<if test="startDate != null and endDate != null">
-				c.in_time between #{startDate} and #{endDate}
+				c.create_time between #{startDate} and #{endDate}
 			</if>
 			<if test="username != null">
 				and u.username = #{username}
 			</if>
 		</where>
-		order by c.in_time desc
+		order by c.create_time desc
 	</select>
 
 	<select id="countToday" resultType="integer">
 		select count(1)
 		from comment
-		where in_time between curdate() and date_add(curdate(), interval 1 day)
+		where create_time between curdate() and date_add(curdate(), interval 1 day)
 	</select>
 
 </mapper>

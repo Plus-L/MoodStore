@@ -45,7 +45,7 @@
 		left join topic t on t.id = n.topic_id
 		where n.target_user_id = #{userId} and n.`read` = #{read}
 		<if test="limit &gt; 0">
-			limit #{limit}
+			limit = #{limit}
 		</if>
 	</select>
 

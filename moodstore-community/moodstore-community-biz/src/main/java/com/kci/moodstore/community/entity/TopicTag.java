@@ -32,9 +32,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @TableName("topic_tag")
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Schema(description = "标签话题对应关系表")
-public class TopicTag extends BaseEntity {
+public class TopicTag {
 
     /**
      * tagId
